@@ -1,0 +1,14 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"D:/Work/unreal/Fortress/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset",
+				"D:/Work/unreal/Fortress/Content/InfinityBladeGrassLands/Maps/ElvenRuins_BuiltData.uasset",
+				"D:/Work/unreal/Fortress/Content/InfinityBladeGrassLands/Maps/ElvenRuins.umap"
+			]
+		}
+	]
+}

@@ -1,0 +1,4 @@
+Browse.VC.db filter=lfs diff=lfs merge=lfs -text
+Browse.VC.db-wal filter=lfs diff=lfs merge=lfs -text
+Solution.VC.db-wal filter=lfs diff=lfs merge=lfs -text
+SharedPCH.Engine.Cpp20.h.pch filter=lfs diff=lfs merge=lfs -text
