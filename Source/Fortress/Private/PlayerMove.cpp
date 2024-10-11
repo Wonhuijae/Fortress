@@ -6,9 +6,15 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 
+UPlayerMove::UPlayerMove()
+{
+    PrimaryComponentTick.bCanEverTick = true;
+}
+
 void UPlayerMove::BeginPlay()
 {
     Super::BeginPlay();
+
     if(moveComp) moveComp->MaxWalkSpeed = walkSpeed;
     else
     {
@@ -25,14 +31,14 @@ void UPlayerMove::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 
 void UPlayerMove::SetupInputBinding(class UEnhancedInputComponent* PlayerInput)
 {
-	// ¹ÙÀÎµù Ã³¸® ÇÔ¼ö
+	// ï¿½ï¿½ï¿½Îµï¿½ Ã³ï¿½ï¿½ ï¿½Ô¼ï¿½
     PlayerInput->BindAction(IA_Turn, ETriggerEvent::Triggered, this, &UPlayerMove::Turn);
     PlayerInput->BindAction(IA_LookUp, ETriggerEvent::Triggered, this, &UPlayerMove::LookUp);
     PlayerInput->BindAction(IA_Move, ETriggerEvent::Triggered, this, &UPlayerMove::Move);
 
     PlayerInput->BindAction(IA_Jump, ETriggerEvent::Started, this, &UPlayerMove::InputJump);
 
-    // ¶Ù±â ¾Ö´Ï¸ÞÀÌ¼Ç
+    // ï¿½Ù±ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½
     PlayerInput->BindAction(IA_Run, ETriggerEvent::Started, this, &UPlayerMove::InputRun);
     PlayerInput->BindAction(IA_Run, ETriggerEvent::Completed, this, &UPlayerMove::InputRun);
 }
@@ -46,15 +52,17 @@ void UPlayerMove::Turn(const FInputActionValue& inputValue)
 void UPlayerMove::LookUp(const FInputActionValue& inputValue)
 {
     float value = inputValue.Get<float>();
-    me->AddControllerYawInput(value);
+    me->AddControllerPitchInput(value);
 }
 
 void UPlayerMove::Move(const FInputActionValue& inputValue)
 {
     FVector2D value = inputValue.Get<FVector2D>();
-    // »óÇÏ ÀÔ·Â Ã³¸®
+
+    UE_LOG(LogTemp, Warning, TEXT("Move Input Value: X=%f, Y=%f"), value.X, value.Y);
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½
     Direction.X = value.X;
-    // ÁÂ¿ì ÀÔ·Â Ã³¸®
+    // ï¿½Â¿ï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½
     Direction.Y = value.Y;
 }
 
@@ -74,10 +82,10 @@ void UPlayerMove::InputJump(const FInputActionValue& inputValue)
 void UPlayerMove::InputRun(const FInputActionValue& inputValue)
 {
     auto Movement = me->GetCharacterMovement();
-    // ¸¸¾à, ÇöÀç ´Þ¸®±â ¸ðµå¶ó¸é
+    // ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
     if (Movement->MaxWalkSpeed > walkSpeed)
     {
-        // °È±â ¼Óµµ·Î ÀüÈ¯
+        // ï¿½È±ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½È¯
         Movement->MaxWalkSpeed = walkSpeed;
     }
     else

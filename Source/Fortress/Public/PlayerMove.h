@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,6 +15,8 @@ class FORTRESS_API UPlayerMove : public UPlayerBaseComponent
 	GENERATED_BODY()
 
 public:
+	UPlayerMove();
+
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -49,17 +51,17 @@ public:
 
 	void InputRun(const struct  FInputActionValue& inputValue);
 
-	// ÀÌµ¿ ¹æÇâ
+	// ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
 	FVector Direction;
 
-	// ¼Óµµ
+	// ï¿½Óµï¿½
 	UPROPERTY(EditAnywhere, Category = Move)
 	float walkSpeed = 300.f;
 
 	UPROPERTY(EditAnywhere, Category = Move)
 	float runSpeed = 600.f;
 
-	// Á¡ÇÁ ¿©ºÎ
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	UPROPERTY(EditAnywhere, Category = Move)
 	bool bInAir = false;
 };

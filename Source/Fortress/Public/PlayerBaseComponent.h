@@ -27,7 +27,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	// »ç¿ëÀÚ ÀÔ·Â ¸ÅÇÎ ÇÔ¼ö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	virtual void SetupInputBinding(class UEnhancedInputComponent* PlayerInput) { }
 
 	UPROPERTY()

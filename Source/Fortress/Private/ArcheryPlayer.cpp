@@ -26,4 +26,7 @@ AArcheryPlayer::AArcheryPlayer()
 	SpringArmComp->bUsePawnControlRotation = true;
 	CameraComp->bUsePawnControlRotation = false;
 	GetCharacterMovement()->bOrientRotationToMovement = false;
+
+	maxHp = 10;
+	hp = maxHp;
 }

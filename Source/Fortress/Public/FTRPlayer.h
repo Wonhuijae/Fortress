@@ -28,25 +28,35 @@ public:
 
 	virtual void Attack();
 
-	// ½ºÇÁ¸µ¾Ï
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class USpringArmComponent* SpringArmComp;
 
-	// Ä«¸Þ¶ó(3ÀÎÄª)
+	// Ä«ï¿½Þ¶ï¿½(3ï¿½ï¿½Äª)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* CameraComp;
 
-	// ÀÌµ¿ ÄÄÆ÷³ÍÆ®
+	// ìž…ë ¥ ì²˜ë¦¬ í•¨ìˆ˜ ì œìž‘
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputMappingContext* IMC_TPS;
+
+	// ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	UPROPERTY(VisibleAnywhere, Category = Component)
 	class UPlayerBaseComponent* playerMove;
 
-	// °ø°Ý ÄÄÆ÷³ÍÆ®
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	UPROPERTY(VisibleAnywhere, Category = Component)
 	class UPlayerBaseComponent* playerAttack;
 	 
-	// Ã¼·Â
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health)
+	int32 hp;
 
-	// °ø°Ý·Â
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health)
+	int32 maxHp;
 
-	// °ø°Ý ÇÔ¼ö
+	UFUNCTION(BlueprintCallable, Category = Health)
+	void OnHitEvent();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Health)
+	void OnGameOver();
 };

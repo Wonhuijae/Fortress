@@ -4,6 +4,9 @@
 #include "FTRPlayer.h"
 #include "PlayerMove.h"
 #include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
+#include "GameFramework/PlayerController.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AFTRPlayer::AFTRPlayer()
@@ -18,7 +21,17 @@ AFTRPlayer::AFTRPlayer()
 void AFTRPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	auto pc = Cast<APlayerController>(Controller);
+	if (pc)
+	{
+		auto subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(pc->GetLocalPlayer());
+		if (subsystem)
+		{
+			subsystem->AddMappingContext(IMC_TPS, 0);
+		}
+	}
+
 }
 
 // Called every frame
@@ -43,5 +56,20 @@ void AFTRPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 void AFTRPlayer::Attack()
 {
 	
+}
+
+void AFTRPlayer::OnHitEvent()
+{
+	hp--;
+	if (hp <= 0)
+	{
+		OnGameOver();
+	}
+}
+
+// BlueprintNativeEvent로 선언된 함수는 _Implementation을 붙여 구현함
+void AFTRPlayer::OnGameOver_Implementation()
+{
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
 }
 
