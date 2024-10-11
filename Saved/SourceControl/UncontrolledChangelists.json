@@ -5,6 +5,11 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"D:/MyGit/Fortress_Git/Fortress/Content/Level/IntroLevel.umap",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Blueprint/WBP_Intro.uasset",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Level/MainLevel.umap",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Blueprint/BP_Archery.uasset",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Blueprint/WBP_PauseMenu.uasset",
 				"D:/dev/unreal/Fortress/Content/Blueprint/BP_Archery.uasset",
 				"D:/dev/unreal/Fortress/Content/Animation/idle.uasset",
 				"D:/dev/unreal/Fortress/Content/Animation/idle_relaxed.uasset",
