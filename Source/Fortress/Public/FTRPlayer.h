@@ -36,26 +36,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* CameraComp;
 
-	// 속도
-	UPROPERTY(EditAnywhere, Category = Move)
-	float walkSpeed;
-	
-	UPROPERTY(EditAnywhere, Category = Move)
-	float runSpeed;
+	// 이동 컴포넌트
+	UPROPERTY(VisibleAnywhere, Category = Component)
+	class UPlayerBaseComponent* playerMove;
 
-	// 이동 함수
-
-	// 점프 여부
-	UPROPERTY(EditAnywhere, Category = Move)
-	bool bInAir = false;
-	
+	// 공격 컴포넌트
+	UPROPERTY(VisibleAnywhere, Category = Component)
+	class UPlayerBaseComponent* playerAttack;
+	 
 	// 체력
 
 	// 공격력
 
 	// 공격 함수
-
-	// 이동 컴포넌트
-
-	// 공격 컴포넌트
 };

@@ -2,6 +2,8 @@
 
 
 #include "FTRPlayer.h"
+#include "PlayerMove.h"
+#include "EnhancedInputComponent.h"
 
 // Sets default values
 AFTRPlayer::AFTRPlayer()
@@ -9,6 +11,7 @@ AFTRPlayer::AFTRPlayer()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	playerMove = CreateDefaultSubobject<UPlayerMove>(TEXT("PlayerMove"));
 }
 
 // Called when the game starts or when spawned
@@ -30,6 +33,11 @@ void AFTRPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	auto PlayerInput = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
+	if (PlayerInput)
+	{
+		playerMove->SetupInputBinding(PlayerInput);
+	}
 }
 
 void AFTRPlayer::Attack()
