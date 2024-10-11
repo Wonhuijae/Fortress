@@ -6,6 +6,13 @@
 			"description": "Default Uncontrolled Changelist",
 			"files": [
 				"D:/dev/unreal/Fortress/Content/Blueprint/BP_Archery.uasset",
+				"D:/dev/unreal/Fortress/Content/Animation/idle.uasset",
+				"D:/dev/unreal/Fortress/Content/Animation/idle_relaxed.uasset",
+				"D:/dev/unreal/Fortress/Content/Blueprint/ABP_Archery.uasset",
+				"D:/dev/unreal/Fortress/Content/Animation/Jump_Apex.uasset",
+				"D:/dev/unreal/Fortress/Content/Animation/Jump_Land.uasset",
+				"D:/dev/unreal/Fortress/Content/Animation/Jump_Start.uasset",
+				"D:/dev/unreal/Fortress/Content/Blueprint/BS_Archery.uasset",
 				"D:/Work/unreal/Fortress/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset",
 				"D:/Work/unreal/Fortress/Content/InfinityBladeGrassLands/Maps/ElvenRuins.umap",
 				"D:/Work/unreal/Fortress/Content/Blueprint/BP_Archery.uasset",
