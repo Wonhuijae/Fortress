@@ -18,12 +18,20 @@ public:
 
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = PlayerAnim)
-	float Speed = 0;
+	UPROPERTY()
+	class AFTRPlayer* Player;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = PlayerAnim)
-	float direction = 0;
+	float Speed;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = PlayerAnim)
-	bool isInAir = 0;
+	float Direction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = PlayerAnim)
+	bool bIsInAir;
+
+	UPROPERTY(EditDefaultsOnly, Category = PlayerAnim)
+	class UAnimMontage* AttackAnimMontage;
+
+	void PlayAttackAnim();
 };
