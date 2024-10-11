@@ -3,7 +3,6 @@
 
 #include "PlayerAnim.h"
 #include "FTRPlayer.h"
-#include "ArcheryPlayer.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
@@ -13,7 +12,7 @@ void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 	if (Player == nullptr)
 	{
 		auto Owner = TryGetPawnOwner();
-		Player = Cast<AArcheryPlayer>(Owner);
+		Player = Cast<AFTRPlayer>(Owner);
 	}
 	
 	if( Player == nullptr)

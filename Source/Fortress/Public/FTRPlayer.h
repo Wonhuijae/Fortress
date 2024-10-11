@@ -26,8 +26,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	virtual void Attack();
-
 	// ��������
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class USpringArmComponent* SpringArmComp;
@@ -39,6 +37,11 @@ public:
 	// InputMappingContext 변수
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	class UInputMappingContext* IMC_TPS;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* IA_Fire;
+
+	void InputFire(const struct FInputActionValue& inputValue);
 
 	// �̵� ������Ʈ
 	UPROPERTY(VisibleAnywhere, Category = Component)

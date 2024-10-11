@@ -7,6 +7,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/PlayerController.h"
 #include "Kismet/GameplayStatics.h"
+#include "PlayerAnim.h"
+#include "Camera/CameraComponent.h"
 
 // Sets default values
 AFTRPlayer::AFTRPlayer()
@@ -50,12 +52,40 @@ void AFTRPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	if (PlayerInput)
 	{
 		playerMove->SetupInputBinding(PlayerInput);
+
+		PlayerInput->BindAction(IA_Fire, ETriggerEvent::Started, this, &AFTRPlayer::InputFire);
 	}
 }
-
-void AFTRPlayer::Attack()
+void AFTRPlayer::InputFire(const FInputActionValue& inputValue)
 {
-	
+	auto anim = Cast<UPlayerAnim>(GetMesh()->GetAnimInstance());
+	anim->PlayAttackAnim();
+
+	// 라인 트레이스
+	FVector startPos = CameraComp->GetComponentLocation();
+	FVector endPos = CameraComp->GetComponentLocation() + CameraComp->GetForwardVector() * 100000;
+
+	FHitResult Hit;
+	FCollisionQueryParams Params;
+	// 플레이어를 충돌 판정에서 제외
+	Params.AddIgnoredActor(this);
+
+	// 충돌 정보, 시작 위치, 종료 위치, 검출 채널, 충돌 옵션
+	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, startPos, endPos, ECC_Visibility, Params);
+	if (bHit)
+	{
+		// 충돌 위치에 효과 재생
+		FTransform effectPos;
+		effectPos.SetLocation(Hit.ImpactPoint);
+		// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), BulletEffectFactory, effectPos);
+	}
+
+	// 적인지 확인
+	auto enemy = Hit.GetActor()->GetDefaultSubobjectByName(TEXT("EnemyFSM"));
+	if (enemy)
+	{
+		
+	}
 }
 
 void AFTRPlayer::OnHitEvent()
