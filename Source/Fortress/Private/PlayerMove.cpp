@@ -41,6 +41,7 @@ void UPlayerMove::SetupInputBinding(class UEnhancedInputComponent* PlayerInput)
     // �ٱ� �ִϸ��̼�
     PlayerInput->BindAction(IA_Run, ETriggerEvent::Started, this, &UPlayerMove::InputRun);
     PlayerInput->BindAction(IA_Run, ETriggerEvent::Completed, this, &UPlayerMove::InputRun);
+    UE_LOG(LogTemp, Warning, TEXT("Controller: %s"), *(GetOwner()->GetName()));
 }
 
 void UPlayerMove::Turn(const FInputActionValue& inputValue)
@@ -59,7 +60,6 @@ void UPlayerMove::Move(const FInputActionValue& inputValue)
 {
     FVector2D value = inputValue.Get<FVector2D>();
 
-    UE_LOG(LogTemp, Warning, TEXT("Move Input Value: X=%f, Y=%f"), value.X, value.Y);
     // ���� �Է� ó��
     Direction.X = value.X;
     // �¿� �Է� ó��

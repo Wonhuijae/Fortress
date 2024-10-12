@@ -13,5 +13,14 @@ UCLASS()
 class FORTRESS_API AFortressGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	//virtual APawn* SpawnDefaultPawnFor(AController* NewPlayer, AActor* StartSpot) override;
+	virtual void BeginPlay() override;
+
+	UPROPERTY(BlueprintReadWrite)
+	UClass* selectedCharaterClass;
+
+	UFUNCTION(BlueprintCallable)
+	void SetClass(bool _select);
 };

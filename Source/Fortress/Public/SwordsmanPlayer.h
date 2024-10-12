@@ -16,4 +16,6 @@ class FORTRESS_API ASwordsmanPlayer : public AFTRPlayer
 
 public:
 	ASwordsmanPlayer();
+
+	virtual void Attack() override;
 };

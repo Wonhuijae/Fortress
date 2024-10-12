@@ -41,3 +41,8 @@ void UPlayerAnim::PlayAttackAnim()
 	Montage_Play(AttackAnimMontage);
 	Montage_JumpToSection(FName(sectionName), AttackAnimMontage);
 }
+
+void UPlayerAnim::PlaySelectAnim()
+{
+	Montage_Play(SelectAnimMontage);
+}

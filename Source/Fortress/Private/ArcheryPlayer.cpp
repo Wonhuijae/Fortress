@@ -31,3 +31,29 @@ AArcheryPlayer::AArcheryPlayer()
 	maxHp = 10;
 	hp = maxHp;
 }
+
+void AArcheryPlayer::Attack()
+{
+	Super::Attack();
+
+	// 라인 트레이스
+	FVector startPos = CameraComp->GetComponentLocation();
+	FVector endPos = CameraComp->GetComponentLocation() + CameraComp->GetForwardVector() * 100000;
+
+	FHitResult Hit;
+	FCollisionQueryParams Params;
+	// 플레이어를 충돌 판정에서 제외
+	Params.AddIgnoredActor(this);
+
+	// 충돌 정보, 시작 위치, 종료 위치, 검출 채널, 충돌 옵션
+	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, startPos, endPos, ECC_Visibility, Params);
+	if (bHit)
+	{
+		// 충돌 위치에 효과 재생
+		FTransform effectPos;
+		effectPos.SetLocation(Hit.ImpactPoint);
+		// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), BulletEffectFactory, effectPos);
+
+		Super::CheckEnemy(Hit);
+	}
+}

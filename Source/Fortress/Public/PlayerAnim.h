@@ -34,4 +34,9 @@ public:
 	class UAnimMontage* AttackAnimMontage;
 
 	void PlayAttackAnim();
+
+	UPROPERTY(EditDefaultsOnly, Category = PlayerAnim)
+	class UAnimMontage* SelectAnimMontage;
+
+	void PlaySelectAnim();
 };

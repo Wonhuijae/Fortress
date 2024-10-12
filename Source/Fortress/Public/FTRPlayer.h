@@ -57,9 +57,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health)
 	int32 maxHp;
 
+	virtual void Attack() {};
+	
+	void CheckEnemy(FHitResult Hit);
+
 	UFUNCTION(BlueprintCallable, Category = Health)
 	void OnHitEvent();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Health)
 	void OnGameOver();
+
+	
 };

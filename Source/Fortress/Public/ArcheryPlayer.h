@@ -16,4 +16,6 @@ class FORTRESS_API AArcheryPlayer : public AFTRPlayer
 	
 public:
 	AArcheryPlayer();
+
+	virtual void Attack() override;
 };
