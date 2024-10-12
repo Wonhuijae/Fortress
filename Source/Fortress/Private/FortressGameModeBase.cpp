@@ -33,9 +33,11 @@
 
 void AFortressGameModeBase::BeginPlay()
 {
+    Super::BeginPlay();
+
     DefaultPawnClass = Cast<USelectInstance>(GetGameInstance())->selectedCharaterClass;
 
-    /*if (Cast<USelectInstance>(GetGameInstance())->bSelectArcher != true)
+    if (Cast<USelectInstance>(GetGameInstance())->bSelectArcher != true)
     {
         AController* cont = GetWorld()->GetFirstPlayerController();
 
@@ -44,30 +46,16 @@ void AFortressGameModeBase::BeginPlay()
             APawn* curPawn = cont->GetPawn();
             if (curPawn)
             {
+                // 현재 폰 제거
                 curPawn->Destroy();
+                UE_LOG(LogTemp, Warning, TEXT("pawn destroy"));
             }
 
-            AActor* startSpot = nullptr;
-            TArray<AActor*> PlayerStarts;
-            UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), PlayerStarts);
-
-            if (PlayerStarts.Num() > 0)
-            {
-                startSpot = PlayerStarts[0];
-            }
-
-            APawn* newPawn = SpawnDefaultPawnFor(cont, startSpot);
-            if (newPawn)
-            {
-                cont->Possess(newPawn);
-                APlayerController* pc = Cast<APlayerController>(cont);
-                newPawn->EnableInput(pc);
-            }
-
-
-            UE_LOG(LogTemp, Warning, TEXT("New Pawn: %s"), *newPawn->GetName());
+            GetWorld()->GetAuthGameMode()->RestartPlayer(cont);
+            //UE_LOG(LogTemp, Warning, TEXT("New Pawn: %s"), *newPawn->GetName());
+            UE_LOG(LogTemp, Warning, TEXT("New Pawn: %s"), *cont->GetPawn()->GetName());
         }
-    }*/
+    }
 }
 
 void AFortressGameModeBase::SetClass(bool _select)
