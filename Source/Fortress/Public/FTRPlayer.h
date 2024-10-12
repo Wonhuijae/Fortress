@@ -67,5 +67,9 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Health)
 	void OnGameOver();
 
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = effect)
+	class UParticleSystem* attackEffect;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = effect)
+	class USoundBase* attackSound;
 };

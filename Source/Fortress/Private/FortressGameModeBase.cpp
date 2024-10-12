@@ -51,7 +51,16 @@ void AFortressGameModeBase::BeginPlay()
                 UE_LOG(LogTemp, Warning, TEXT("pawn destroy"));
             }
 
-            GetWorld()->GetAuthGameMode()->RestartPlayer(cont);
+            AActor* startSpot = nullptr;
+            TArray<AActor*> PlayerStarts;
+            UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), PlayerStarts);
+
+            if (PlayerStarts.Num() > 0)
+            {
+                startSpot = PlayerStarts[0];
+            }
+
+            GetWorld()->GetAuthGameMode()->RestartPlayerAtPlayerStart(cont, startSpot);
             //UE_LOG(LogTemp, Warning, TEXT("New Pawn: %s"), *newPawn->GetName());
             UE_LOG(LogTemp, Warning, TEXT("New Pawn: %s"), *cont->GetPawn()->GetName());
         }

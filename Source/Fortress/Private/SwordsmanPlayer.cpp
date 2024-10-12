@@ -5,6 +5,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 ASwordsmanPlayer::ASwordsmanPlayer()
 {
@@ -40,8 +41,8 @@ void ASwordsmanPlayer::Attack()
 	Super::Attack();
 
 	// 라인 트레이스
-	FVector startPos = GetActorLocation();
-	FVector endPos = startPos + GetActorForwardVector() * 450;
+	FVector startPos = CameraComp->GetComponentLocation();
+	FVector endPos = CameraComp->GetComponentLocation() + CameraComp->GetForwardVector() * 450;
 
 	FHitResult Hit;
 	FCollisionQueryParams Params;
@@ -55,7 +56,7 @@ void ASwordsmanPlayer::Attack()
 		// 충돌 위치에 효과 재생
 		FTransform effectPos;
 		effectPos.SetLocation(Hit.ImpactPoint);
-		// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), BulletEffectFactory, effectPos);
+		// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), attackEffect, effectPos);
 
 		Super::CheckEnemy(Hit);
 	}

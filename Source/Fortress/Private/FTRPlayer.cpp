@@ -60,6 +60,7 @@ void AFTRPlayer::InputFire(const FInputActionValue& inputValue)
 {
 	auto anim = Cast<UPlayerAnim>(GetMesh()->GetAnimInstance());
 	anim->PlayAttackAnim();
+	// UGameplayStatics::PlaySound2D(GetWorld(), attackSound);
 
 	Attack();
 }

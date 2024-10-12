@@ -4,6 +4,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 AArcheryPlayer::AArcheryPlayer()
 {
@@ -52,7 +53,7 @@ void AArcheryPlayer::Attack()
 		// 충돌 위치에 효과 재생
 		FTransform effectPos;
 		effectPos.SetLocation(Hit.ImpactPoint);
-		// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), BulletEffectFactory, effectPos);
+		// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), attackEffect, effectPos);
 
 		Super::CheckEnemy(Hit);
 	}
