@@ -34,5 +34,10 @@ void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 
 void UPlayerAnim::PlayAttackAnim()
 {
+	int32 idx = FMath::RandRange(0, 2);
+
+	FString sectionName = FString::Printf(TEXT("Attack%d"), idx);
+
 	Montage_Play(AttackAnimMontage);
+	Montage_JumpToSection(FName(sectionName), AttackAnimMontage);
 }
