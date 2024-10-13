@@ -9,6 +9,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "PlayerAnim.h"
 #include "Camera/CameraComponent.h"
+#include "EnemyFSM.h"
 
 // Sets default values
 AFTRPlayer::AFTRPlayer()
@@ -71,7 +72,8 @@ void AFTRPlayer::CheckEnemy(FHitResult Hit)
 	auto enemy = Hit.GetActor()->GetDefaultSubobjectByName(TEXT("EnemyFSM"));
 	if (enemy)
 	{
-
+		auto EnemyFSM = Cast<UEnemyFSM>(enemy);
+		EnemyFSM->OnDamageProcess();
 	}
 }
 

@@ -122,6 +122,10 @@ void UEnemyFSM::DamageState()
 
 void UEnemyFSM::DieState()
 {
+	if (anim->bDieDone == false)
+	{
+		return;
+	}
 	FVector P0 = Me->GetActorLocation();
 	FVector VT = FVector::DownVector * DieSpeed * GetWorld()->DeltaTimeSeconds;
 	FVector P = P0 + VT;
@@ -143,12 +147,21 @@ void UEnemyFSM::OnDamageProcess()
 	if (HP > 0)
 	{
 		mState = EEnemyState::Damage;
+
+		CurrentTime = 0;
+
+		// 피격 애니메이션 
+		int32 index = FMath::RandRange(0, 1);
+		FString sectionName = FString::Printf(TEXT("Damage%d"), index);
+		anim->PlayDamageAnim(FName(*sectionName));
 	}
 	else
 	{
 		mState = EEnemyState::Die;
 		// 콜라이더 비활성화
 		Me->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+		anim->PlayDamageAnim(TEXT("Die"));
 	}
 	anim->animState = mState;
 }
