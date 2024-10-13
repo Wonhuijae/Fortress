@@ -2,6 +2,9 @@
 
 
 #include "EnemyFSM.h"
+#include "FTRPlayer.h"
+#include "Enemy.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 UEnemyFSM::UEnemyFSM()
@@ -19,18 +22,20 @@ void UEnemyFSM::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	auto Actor = UGameplayStatics::GetActorOfClass(GetWorld(), AFTRPlayer::StaticClass());
+	target = Cast<AFTRPlayer>(Actor);
+	Me = Cast<AEnemy>(GetOwner());
 	
 }
 
 
 // Called every frame
 void UEnemyFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
+{	
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
 	FString LogMsg = UEnum::GetValueAsString(mState);
 	GEngine->AddOnScreenDebugMessage(0, 1, FColor::Cyan, LogMsg);
-	
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	switch (mState)
 	{
@@ -54,17 +59,43 @@ void UEnemyFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 
 void UEnemyFSM::IdleState()
 {
-
+	CurrentTime += GetWorld()->DeltaTimeSeconds;
+	if (CurrentTime > IdleDelayTime)
+	{
+		mState = EEnemyState::Move;
+		CurrentTime = 0;
+	}
 }
 
 void UEnemyFSM::MoveState()
 {
+	// 타깃(플레이어) 방향으로 이동
+	FVector Destination = target->GetActorLocation();
+	FVector Dir = Destination - Me->GetActorLocation();
+	Me->AddMovementInput(Dir.GetSafeNormal());
 
+	// 공격 범위 들어오면 공격!
+	if (Dir.Size() < AttackRange)
+	{
+		mState = EEnemyState::Attack;
+	}
 }
 
 void UEnemyFSM::AttackState()
 {
+	CurrentTime += GetWorld()->DeltaTimeSeconds;
+	if (CurrentTime > AttackDelayTime)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Attack!!!!"));
+		CurrentTime = 0;
+	}
 
+	// 타깃(플레이어)와 일정 이상 멀어지면 Move
+	float Distance = FVector::Distance(target->GetActorLocation(), Me->GetActorLocation());
+	if (Distance > AttackRange)
+	{
+		mState = EEnemyState::Move;
+	}
 }
 
 void UEnemyFSM::DamageState()
@@ -75,5 +106,11 @@ void UEnemyFSM::DamageState()
 void UEnemyFSM::DieState()
 {
 
+}
+
+void UEnemyFSM::OnDamageProcess()
+{
+	//시험(플레이어 Input 함수에 구현되어 있어야 함)
+	Me->Destroy();
 }
 

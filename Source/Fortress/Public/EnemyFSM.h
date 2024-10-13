@@ -42,4 +42,28 @@ public:
 	void AttackState();
 	void DamageState();
 	void DieState();
+
+	// 대기 시간
+		UPROPERTY(EditDefaultsOnly, Category = FSM)
+	float IdleDelayTime = 2;
+	// 경과 시간
+	float CurrentTime = 0;
+
+	// 타깃(플레이어!)
+	UPROPERTY(VisibleAnywhere, Category = FSM)
+	class AFTRPlayer* target;
+
+	UPROPERTY()
+	class AEnemy* Me;
+
+	// 공격 범위
+	UPROPERTY(EditAnywhere, Category = FSM)
+	float AttackRange = 150.0f;
+
+	// 공격 대기 시간
+	UPROPERTY(EditAnywhere, Category = FSM)
+	float AttackDelayTime = 2.0f;
+
+	// 피격 알림 이벤트
+	void OnDamageProcess();
 };
