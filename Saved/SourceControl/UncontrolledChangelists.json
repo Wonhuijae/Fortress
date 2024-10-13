@@ -5,6 +5,8 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/Users/Administrator/Documents/GitHub/Fortress/Content/Level/MainLevel.umap",
+				"C:/Users/Administrator/Documents/GitHub/Fortress/Content/Blueprint/BP_Enemy.uasset",
 				"D:/dev/unreal/Fortress/Content/Blueprint/BP_Archery.uasset",
 				"D:/dev/unreal/Fortress/Content/Animation/idle.uasset",
 				"D:/dev/unreal/Fortress/Content/Animation/idle_relaxed.uasset",
@@ -54,7 +56,6 @@
 				"D:/dev/unreal/Fortress/Content/Blueprint/WBP_SelectPopup.uasset",
 				"D:/dev/unreal/Fortress/Content/Resource/UI/rectangle-bronze-frame-white-background-vector/v695batch3-sasi-61-simpleframe.uasset",
 				"D:/dev/unreal/Fortress/Content/Resource/UI/rectangle-bronze-frame-white-background-vector/rb_167873.uasset",
-				"D:/dev/unreal/Fortress/Content/Blueprint/WBP_Select.uasset",
 				"D:/dev/unreal/Fortress/Content/Blueprint/BP_S_Soweds.uasset",
 				"D:/dev/unreal/Fortress/Content/Blueprint/BP_SelectArchery.uasset",
 				"D:/MyGit/Fortress_Git/Fortress/Content/Level/IntroLevel.umap",
