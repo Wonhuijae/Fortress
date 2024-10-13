@@ -9080,3 +9080,24 @@ LogConfig: Set CVar [[r.Shadow.DetectVertexShaderLayerAtRuntime:1]]
 [2024.10.13-10.07.24:288][844]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=7
 [2024.10.13-10.07.24:302][844]LogUObjectHash: Compacting FUObjectHashTables data took   1.30ms
 [2024.10.13-10.07.24:366][845]LogPlayLevel: Display: Destroying online subsystem :Context_62
+[2024.10.13-10.08.36:524][404]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2024.10.13-10.08.36:570][404]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/Level/MainLevel" FILE="../../../../../Github/Fortress/Content/Level/MainLevel.umap" SILENT=true AUTOSAVING=false KEEPDIRTY=false
+[2024.10.13-10.08.36:609][404]LogUObjectHash: Compacting FUObjectHashTables data took   1.27ms
+[2024.10.13-10.08.36:856][404]LogSavePackage: Moving output files for package: /Game/Level/MainLevel
+[2024.10.13-10.08.36:857][404]LogSavePackage: Moving '../../../../../Github/Fortress/Saved/MainLevelEC50573E43D96591AC4AB2948EAB5007.tmp' to '../../../../../Github/Fortress/Content/Level/MainLevel.umap'
+[2024.10.13-10.08.36:889][404]LogFileHelpers: Saving map 'MainLevel' took 0.327
+[2024.10.13-10.08.36:894][404]LogFileHelpers: InternalPromptForCheckoutAndSave took 369 ms (total: 1.74 sec)
+[2024.10.13-10.08.36:898][404]AssetCheck: New page: Asset Save: MainLevel
+[2024.10.13-10.08.36:898][404]LogContentValidation: Display: Validating /Script/Engine.World /Game/Level/MainLevel.MainLevel
+[2024.10.13-10.12.45:131][355]LogLiveCoding: Display: Starting Live Coding compile.
+[2024.10.13-10.13.21:195][464]LogLiveCoding: Display:    D:\Github\Fortress\Binaries\Win64\UnrealEditor-Fortress.patch_8.lib 라이브러리 및 D:\Github\Fortress\Binaries\Win64\UnrealEditor-Fortress.patch_8.exp 개체를 생성하고 있습니다.
+[2024.10.13-10.13.21:569][465]LogClass: UPackage /Script/Fortress Reload.
+[2024.10.13-10.13.21:569][465]LogClass: UClass EnemyFSM Reload.
+[2024.10.13-10.13.21:572][465]LogClass: Could not find existing class EnemyFSM in package /Script/Fortress for reload, assuming new or modified class
+[2024.10.13-10.13.21:582][465]Re-instancing EnemyFSM after reload.
+[2024.10.13-10.13.22:621][465]LogUObjectHash: Compacting FUObjectHashTables data took   0.82ms
+[2024.10.13-10.13.22:949][466]Display: Reload/Re-instancing Complete: 1 package changed, 1 class changed, 1 class unchanged, 1 enum unchanged, 1 function remapped
+[2024.10.13-10.13.22:949][466]LogLiveCoding: Warning: Live coding succeeded, data type changes may cause packaging to fail if assets reference the new or updated data types
+[2024.10.13-10.15.08:557][733]LogActorFactory: Loading ActorFactory Class /Script/Engine.LevelInstance
+[2024.10.13-10.15.40:435][ 93]LogSlate: External Image Picker: DecompressImage failed
+[2024.10.13-10.15.42:752][241]LogSlate: Window 'Project Settings' being destroyed

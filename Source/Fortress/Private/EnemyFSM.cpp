@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Components/CapsuleComponent.h"
 #include "EnemyAnim.h"
+#include "AIController.h"
 
 
 // Sets default values for this component's properties
@@ -30,6 +31,8 @@ void UEnemyFSM::BeginPlay()
 	Me = Cast<AEnemy>(GetOwner());
 	
 	anim = Cast<UEnemyAnim>(Me->GetMesh()->GetAnimInstance());
+
+	ai = Cast<AAIController>(Me->GetController());
 }
 
 
@@ -78,7 +81,10 @@ void UEnemyFSM::MoveState()
 	// 타깃(플레이어) 방향으로 이동
 	FVector Destination = target->GetActorLocation();
 	FVector Dir = Destination - Me->GetActorLocation();
-	Me->AddMovementInput(Dir.GetSafeNormal());
+	// 타깃에게 이동
+	//Me->AddMovementInput(Dir.GetSafeNormal());
+
+	ai->MoveToLocation(Destination);
 
 	// 공격 범위 들어오면 공격!
 	if (Dir.Size() < AttackRange)
