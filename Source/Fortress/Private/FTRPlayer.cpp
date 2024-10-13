@@ -40,7 +40,6 @@ void AFTRPlayer::BeginPlay()
 void AFTRPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -56,6 +55,7 @@ void AFTRPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 		PlayerInput->BindAction(IA_Fire, ETriggerEvent::Started, this, &AFTRPlayer::InputFire);
 	}
 }
+
 void AFTRPlayer::InputFire(const FInputActionValue& inputValue)
 {
 	auto anim = Cast<UPlayerAnim>(GetMesh()->GetAnimInstance());

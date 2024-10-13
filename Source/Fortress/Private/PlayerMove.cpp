@@ -41,7 +41,7 @@ void UPlayerMove::SetupInputBinding(class UEnhancedInputComponent* PlayerInput)
     // �ٱ� �ִϸ��̼�
     PlayerInput->BindAction(IA_Run, ETriggerEvent::Started, this, &UPlayerMove::InputRun);
     PlayerInput->BindAction(IA_Run, ETriggerEvent::Completed, this, &UPlayerMove::InputRun);
-    UE_LOG(LogTemp, Warning, TEXT("Controller: %s"), *(GetOwner()->GetName()));
+    UE_LOG(LogTemp, Warning, TEXT("Controller bind: %s"), *(GetOwner()->GetName()));
 }
 
 void UPlayerMove::Turn(const FInputActionValue& inputValue)
@@ -64,6 +64,8 @@ void UPlayerMove::Move(const FInputActionValue& inputValue)
     Direction.X = value.X;
     // �¿� �Է� ó��
     Direction.Y = value.Y;
+
+    UE_LOG(LogTemp, Warning, TEXT("%f %f"), value.X, value.Y);
 }
 
 void UPlayerMove::PlayerMove()

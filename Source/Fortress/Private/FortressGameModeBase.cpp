@@ -2,6 +2,7 @@
 
 
 #include "FortressGameModeBase.h"
+#include "FTRPlayer.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/Controller.h"
@@ -31,10 +32,14 @@
 //    return Super::SpawnDefaultPawnFor(NewPlayer, StartSpot);
 //}
 
+AFortressGameModeBase::AFortressGameModeBase()
+{
+   // if(selectedCharaterClass != nullptr) 
+}
+
 void AFortressGameModeBase::BeginPlay()
 {
     Super::BeginPlay();
-
     DefaultPawnClass = Cast<USelectInstance>(GetGameInstance())->selectedCharaterClass;
 
     if (Cast<USelectInstance>(GetGameInstance())->bSelectArcher != true)
@@ -42,15 +47,7 @@ void AFortressGameModeBase::BeginPlay()
         AController* cont = GetWorld()->GetFirstPlayerController();
 
         if (cont)
-        {
-            APawn* curPawn = cont->GetPawn();
-            if (curPawn)
-            {
-                // 현재 폰 제거
-                curPawn->Destroy();
-                UE_LOG(LogTemp, Warning, TEXT("pawn destroy"));
-            }
-
+        {   
             AActor* startSpot = nullptr;
             TArray<AActor*> PlayerStarts;
             UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), PlayerStarts);
@@ -60,11 +57,42 @@ void AFortressGameModeBase::BeginPlay()
                 startSpot = PlayerStarts[0];
             }
 
-            GetWorld()->GetAuthGameMode()->RestartPlayerAtPlayerStart(cont, startSpot);
+            APawn* curPawn = cont->GetPawn();
+            if (curPawn)
+            {
+                // 현재 폰 제거
+                curPawn->Destroy();
+                UE_LOG(LogTemp, Warning, TEXT("pawn destroy"));
+            }
+
+            APawn* newPawn = SpawnDefaultPawnFor(cont, startSpot);
+            if (newPawn)
+            {
+                cont->Possess(newPawn);
+
+                APlayerController* pc = GetWorld()->GetFirstPlayerController();
+                if (pc)
+                {
+                    pc->SetInputMode(FInputModeGameOnly());
+                }
+                cont->EnableInput(pc);
+
+                if (cont->GetPawn() == newPawn)
+                {
+                    UE_LOG(LogTemp, Warning, TEXT("Possession successful: %s"), *newPawn->GetName());
+                }
+                else
+                {
+                    UE_LOG(LogTemp, Error, TEXT("Possession failed."));
+                }
+            }
+
+            // GetWorld()->GetAuthGameMode()->RestartPlayer(cont);
             //UE_LOG(LogTemp, Warning, TEXT("New Pawn: %s"), *newPawn->GetName());
             UE_LOG(LogTemp, Warning, TEXT("New Pawn: %s"), *cont->GetPawn()->GetName());
         }
     }
+    
 }
 
 void AFortressGameModeBase::SetClass(bool _select)

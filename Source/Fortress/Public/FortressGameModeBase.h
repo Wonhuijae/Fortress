@@ -15,6 +15,9 @@ class FORTRESS_API AFortressGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 
 public:
+
+	AFortressGameModeBase();
+
 	//virtual APawn* SpawnDefaultPawnFor(AController* NewPlayer, AActor* StartSpot) override;
 	virtual void BeginPlay() override;
 
