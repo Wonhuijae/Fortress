@@ -16,12 +16,12 @@ enum class EEnemyState : uint8
 	Die,
 };
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class FORTRESS_API UEnemyFSM : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UEnemyFSM();
 
@@ -29,7 +29,7 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -44,7 +44,7 @@ public:
 	void DieState();
 
 	// 대기 시간
-		UPROPERTY(EditDefaultsOnly, Category = FSM)
+	UPROPERTY(EditDefaultsOnly, Category = FSM)
 	float IdleDelayTime = 2;
 	// 경과 시간
 	float CurrentTime = 0;
@@ -79,4 +79,10 @@ public:
 
 	UPROPERTY()
 	class UEnemyAnim* anim;
+
+	UPROPERTY()
+	class AAIController* ai;
+
+	FVector randomPos;
+	bool GetRandomPositionInNavMesh(FVector centerLocation, float radius, FVector& dest);
 };

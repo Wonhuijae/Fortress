@@ -8,6 +8,8 @@
 #include "Components/CapsuleComponent.h"
 #include "EnemyAnim.h"
 #include "AIController.h"
+#include "NavigationSystem.h"
+#include "Navigation/PathFollowingComponent.h"
 
 
 // Sets default values for this component's properties
@@ -71,9 +73,13 @@ void UEnemyFSM::IdleState()
 	{
 		mState = EEnemyState::Move;
 		CurrentTime = 0;
+
+		anim->animState = mState;
+
+		GetRandomPositionInNavMesh(Me->GetActorLocation(), 500, randomPos);
 	}
 
-	anim->animState = mState;
+
 }
 
 void UEnemyFSM::MoveState()
@@ -83,12 +89,34 @@ void UEnemyFSM::MoveState()
 	FVector Dir = Destination - Me->GetActorLocation();
 	// 타깃에게 이동
 	//Me->AddMovementInput(Dir.GetSafeNormal());
+	// 뭐지?? 없어도 되긴 하는데
+	//ai->MoveToLocation(Destination);
 
-	ai->MoveToLocation(Destination);
+	auto ns = UNavigationSystemV1::GetNavigationSystem(GetWorld());
+
+	FPathFindingQuery query;
+	FAIMoveRequest req;
+	req.SetAcceptanceRadius(3);
+	req.SetGoalLocation(Destination);
+	ai->BuildPathfindingQuery(req, query);
+	FPathFindingResult r = ns->FindPathSync(query);
+	if (r.Result == ENavigationQueryResult::Success)
+	{
+		ai->MoveToLocation(Destination);
+	}
+	else
+	{
+		auto result = ai->MoveToLocation(randomPos);
+		if (result == EPathFollowingRequestResult::AlreadyAtGoal)
+		{
+			GetRandomPositionInNavMesh(Me->GetActorLocation(), 500, randomPos);
+		}
+	}
 
 	// 공격 범위 들어오면 공격!
 	if (Dir.Size() < AttackRange)
 	{
+		ai->StopMovement();
 		mState = EEnemyState::Attack;
 		anim->animState = mState;
 		anim->bAttackPlay = true;
@@ -112,6 +140,8 @@ void UEnemyFSM::AttackState()
 	{
 		mState = EEnemyState::Move;
 		anim->animState = mState;
+
+		GetRandomPositionInNavMesh(Me->GetActorLocation(), 500, randomPos);
 	}
 }
 
@@ -170,5 +200,14 @@ void UEnemyFSM::OnDamageProcess()
 		anim->PlayDamageAnim(TEXT("Die"));
 	}
 	anim->animState = mState;
+	ai->StopMovement();
 }
 
+bool UEnemyFSM::GetRandomPositionInNavMesh(FVector centerLocation, float radius, FVector& dest)
+{
+	auto ns = UNavigationSystemV1::GetNavigationSystem(GetWorld());
+	FNavLocation loc;
+	bool result = ns->GetRandomReachablePointInRadius(centerLocation, radius, loc);
+	dest = loc.Location;
+	return result;
+}
