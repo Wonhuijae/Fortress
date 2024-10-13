@@ -5,6 +5,8 @@
 #include "FTRPlayer.h"
 #include "Enemy.h"
 #include "Kismet/GameplayStatics.h"
+#include "Components/CapsuleComponent.h"
+
 
 // Sets default values for this component's properties
 UEnemyFSM::UEnemyFSM()
@@ -100,17 +102,43 @@ void UEnemyFSM::AttackState()
 
 void UEnemyFSM::DamageState()
 {
-
+	CurrentTime += GetWorld()->DeltaTimeSeconds;
+	if (CurrentTime > DamageDelayTime)
+	{
+		mState = EEnemyState::Idle;
+		CurrentTime = 0;
+	}
 }
 
 void UEnemyFSM::DieState()
 {
+	FVector P0 = Me->GetActorLocation();
+	FVector VT = FVector::DownVector * DieSpeed * GetWorld()->DeltaTimeSeconds;
+	FVector P = P0 + VT;
+	Me->SetActorLocation(P);
 
+	// 만약 2미터 이상 내려왔다면
+	if (P.Z < -200.0f)
+	{
+		Me->Destroy();
+	}
 }
 
 void UEnemyFSM::OnDamageProcess()
 {
 	//시험(플레이어 Input 함수에 구현되어 있어야 함)
-	Me->Destroy();
+	//Me->Destroy();
+
+	HP--;
+	if (HP > 0)
+	{
+		mState = EEnemyState::Damage;
+	}
+	else
+	{
+		mState = EEnemyState::Die;
+		// 콜라이더 비활성화
+		Me->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 }
 

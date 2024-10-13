@@ -66,4 +66,14 @@ public:
 
 	// 피격 알림 이벤트
 	void OnDamageProcess();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = FSM)
+	int32 HP = 3;
+
+	// 피격 대기 시간
+	UPROPERTY(EditAnywhere, Category = FSM)
+	float DamageDelayTime = 2.0f;
+
+	UPROPERTY(EditAnywhere, Category = FSM)
+	float DieSpeed = 50.0f;
 };
