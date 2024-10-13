@@ -12,6 +12,8 @@
 				"D:/Github/Fortress/Content/ParagonGrux/Characters/Heroes/Grux/Meshes/Grux_Skeleton.uasset",
 				"D:/Github/Fortress/Content/Animation/EnemyAttackedMontage.uasset",
 				"D:/Github/Fortress/Content/Animation/DieEndAnimation.uasset",
+				"D:/Github/Fortress/Content/Blueprint/BP_EnemySpawn.uasset",
+				"D:/Github/Fortress/Content/Blueprint/BP_EnemySpawnPoint.uasset",
 				"C:/Users/Administrator/Documents/GitHub/Fortress/Content/Level/MainLevel.umap",
 				"C:/Users/Administrator/Documents/GitHub/Fortress/Content/Blueprint/BP_Enemy.uasset",
 				"D:/dev/unreal/Fortress/Content/Blueprint/BP_Archery.uasset",
