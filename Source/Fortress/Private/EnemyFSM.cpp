@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/CapsuleComponent.h"
+#include "EnemyAnim.h"
 
 
 // Sets default values for this component's properties
@@ -28,6 +29,7 @@ void UEnemyFSM::BeginPlay()
 	target = Cast<AFTRPlayer>(Actor);
 	Me = Cast<AEnemy>(GetOwner());
 	
+	anim = Cast<UEnemyAnim>(Me->GetMesh()->GetAnimInstance());
 }
 
 
@@ -67,6 +69,8 @@ void UEnemyFSM::IdleState()
 		mState = EEnemyState::Move;
 		CurrentTime = 0;
 	}
+
+	anim->animState = mState;
 }
 
 void UEnemyFSM::MoveState()
@@ -80,6 +84,9 @@ void UEnemyFSM::MoveState()
 	if (Dir.Size() < AttackRange)
 	{
 		mState = EEnemyState::Attack;
+		anim->animState = mState;
+		anim->bAttackPlay = true;
+		CurrentTime = AttackDelayTime;
 	}
 }
 
@@ -90,6 +97,7 @@ void UEnemyFSM::AttackState()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Attack!!!!"));
 		CurrentTime = 0;
+		anim->bAttackPlay = true;
 	}
 
 	// 타깃(플레이어)와 일정 이상 멀어지면 Move
@@ -97,6 +105,7 @@ void UEnemyFSM::AttackState()
 	if (Distance > AttackRange)
 	{
 		mState = EEnemyState::Move;
+		anim->animState = mState;
 	}
 }
 
@@ -107,6 +116,7 @@ void UEnemyFSM::DamageState()
 	{
 		mState = EEnemyState::Idle;
 		CurrentTime = 0;
+		anim->animState = mState;
 	}
 }
 
@@ -140,5 +150,6 @@ void UEnemyFSM::OnDamageProcess()
 		// 콜라이더 비활성화
 		Me->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
+	anim->animState = mState;
 }
 

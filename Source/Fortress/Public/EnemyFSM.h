@@ -76,4 +76,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = FSM)
 	float DieSpeed = 50.0f;
+
+	UPROPERTY()
+	class UEnemyAnim* anim;
 };
