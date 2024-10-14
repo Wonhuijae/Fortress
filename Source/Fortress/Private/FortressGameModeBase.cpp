@@ -92,7 +92,6 @@ void AFortressGameModeBase::BeginPlay()
             UE_LOG(LogTemp, Warning, TEXT("New Pawn: %s"), *cont->GetPawn()->GetName());
         }
     }
-    
 }
 
 void AFortressGameModeBase::SetClass(bool _select)
