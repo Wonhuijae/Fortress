@@ -35,12 +35,12 @@ AEnemy::AEnemy()
 	HPComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("HPComp"));
 	HPComp->SetupAttachment(RootComponent);
 
-	ConstructorHelpers::FClassFinder<UUserWidget> tempHP(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/WBP_EnemyHP.WBP_EnemyHP'"));
+	ConstructorHelpers::FClassFinder<UUserWidget>tempHP(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/WBP_EnemyHP.WBP_EnemyHP_C'"));
 	if (tempHP.Succeeded())
 	{
 		HPComp->SetWidgetClass(tempHP.Class);
 		HPComp->SetDrawSize(FVector2D(150, 20));
-		HPComp->SetRelativeLocation(FVector(0, 0, 90));
+		HPComp->SetRelativeLocation(FVector(0, 0, 110));
 		HPComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 

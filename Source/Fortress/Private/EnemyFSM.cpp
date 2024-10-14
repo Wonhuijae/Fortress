@@ -151,11 +151,11 @@ void UEnemyFSM::OnDamageProcess(int32 Damage)
 
 	//HP--;
 	ai->StopMovement();
+
 	UpdateHP(-Damage);
 	if (HP > 0)
 	{
 		mState = EEnemyState::Damage;
-
 		CurrentTime = 0;
 
 		// 피격 애니메이션 
