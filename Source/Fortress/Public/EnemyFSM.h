@@ -65,10 +65,11 @@ public:
 	float AttackDelayTime = 4.0f;
 
 	// 피격 알림 이벤트
-	void OnDamageProcess();
+	void OnDamageProcess(int32 Damage);
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = FSM)
-	int32 HP = 3;
+	int32 HP;
+	int32 MaxHP = 10;
 
 	// 피격 대기 시간
 	UPROPERTY(EditAnywhere, Category = FSM)
@@ -82,4 +83,7 @@ public:
 
 	UPROPERTY()
 	class AAIController* ai;
+
+	void UpdateHP(int32 NewHP);
+	void InitHp();
 };
