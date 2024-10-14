@@ -84,6 +84,7 @@ void AFTRPlayer::OnHitEvent()
 	{
 		OnGameOver();
 	}
+	UE_LOG(LogTemp, Warning, TEXT("%d"), hp);
 }
 
 // BlueprintNativeEvent로 선언된 함수는 _Implementation을 붙여 구현함

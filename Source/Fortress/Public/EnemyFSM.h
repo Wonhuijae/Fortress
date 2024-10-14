@@ -62,7 +62,7 @@ public:
 
 	// 공격 대기 시간
 	UPROPERTY(EditAnywhere, Category = FSM)
-	float AttackDelayTime = 4.0f;
+	float AttackDelayTime = 2.5f;
 
 	// 피격 알림 이벤트
 	void OnDamageProcess(int32 Damage);
