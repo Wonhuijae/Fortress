@@ -29,4 +29,10 @@ public:
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = FSMComponent)
 	class UEnemyFSM* EnemyFSM;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UWidgetComponent* HPComp;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void DamageUpdateHPUI(float HP, float MaxHP);
 };

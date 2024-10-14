@@ -144,12 +144,14 @@ void UEnemyFSM::DieState()
 	}
 }
 
-void UEnemyFSM::OnDamageProcess()
+void UEnemyFSM::OnDamageProcess(int32 Damage)
 {
 	//시험(플레이어 Input 함수에 구현되어 있어야 함)
 	//Me->Destroy();
 
-	HP--;
+	//HP--;
+	ai->StopMovement();
+	UpdateHP(-Damage);
 	if (HP > 0)
 	{
 		mState = EEnemyState::Damage;
@@ -163,6 +165,7 @@ void UEnemyFSM::OnDamageProcess()
 	}
 	else
 	{
+		CurrentTime = 0;
 		mState = EEnemyState::Die;
 		// 콜라이더 비활성화
 		Me->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -170,5 +173,18 @@ void UEnemyFSM::OnDamageProcess()
 		anim->PlayDamageAnim(TEXT("Die"));
 	}
 	anim->animState = mState;
+}
+
+void UEnemyFSM::UpdateHP(int32 NewHP)
+{
+	HP = FMath::Max(0, HP + NewHP);
+
+	Me->DamageUpdateHPUI(HP, MaxHP);
+}
+
+void UEnemyFSM::InitHp()
+{
+	HP = 0;
+	UpdateHP(MaxHP);
 }
 

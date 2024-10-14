@@ -73,7 +73,7 @@ void AFTRPlayer::CheckEnemy(FHitResult Hit)
 	if (enemy)
 	{
 		auto EnemyFSM = Cast<UEnemyFSM>(enemy);
-		EnemyFSM->OnDamageProcess();
+		EnemyFSM->OnDamageProcess(1);
 	}
 }
 
