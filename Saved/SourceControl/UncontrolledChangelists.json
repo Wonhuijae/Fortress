@@ -10,7 +10,17 @@
 				"D:/MyGit/Fortress_Git/Fortress/Content/Blueprint/WBP_ScreenUI_Archery.uasset",
 				"D:/MyGit/Fortress_Git/Fortress/Content/Blueprint/ABP_Enemy.uasset",
 				"D:/MyGit/Fortress_Git/Fortress/Content/Blueprint/BP_Enemy.uasset",
-				"D:/MyGit/Fortress_Git/Fortress/Content/Blueprint/BP_Archery.uasset"
+				"D:/MyGit/Fortress_Git/Fortress/Content/Blueprint/BP_Archery.uasset",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Resource/Audio/Chracter.uasset",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Resource/Audio/Main.uasset",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Resource/Audio/OpenBGM.uasset",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Resource/Audio/OpenBGM_Cue.uasset",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Level/IntroLevel.umap",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Level/SelectLevel.umap",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Resource/Audio/Chracter_Cue.uasset",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Resource/Audio/Main_Cue.uasset",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Level/MainLevel.umap",
+				"D:/MyGit/Fortress_Git/Fortress/Content/Blueprint/WBP_GameOver.uasset"
 			]
 		}
 	]
